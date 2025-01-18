@@ -4,7 +4,7 @@ from google.cloud import speech
 from pydub import AudioSegment
 
 # Set up Google Cloud credentials
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\Admin\Documents\GitHub\python-tools\speech_to_text\key.json"
 
 def convert_m4a_to_mp3(input_path, output_path):
     """
@@ -68,6 +68,10 @@ def process_audio_folder(input_folder, output_folder, output_text_file):
     Returns:
         None
     """
+    if not os.path.exists(input_folder):
+        print(f"Error: Input folder '{input_folder}' does not exist!")
+        return
+    
     with open(output_text_file, "w", encoding="utf-8") as out_file:
         for file_name in os.listdir(input_folder):
             file_path = os.path.join(input_folder, file_name)
@@ -94,7 +98,7 @@ def process_audio_folder(input_folder, output_folder, output_text_file):
 
 if __name__ == "__main__":
     # Folder containing audio files
-    input_folder = "input"
+    input_folder = "C:/Users/Admin/Documents/GitHub/python-tools/speech_to_text/input"
     
     # Folder to save converted MP3 files
     output_folder = "mp3_output"
